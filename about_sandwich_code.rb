@@ -10,7 +10,8 @@ class AboutSandwichCode < Neo::Koan
     end
     count
   ensure
-    file.close if file
+    # file.close if file
+    file&.close
   end
 
   def test_counting_lines

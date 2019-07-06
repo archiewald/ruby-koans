@@ -14,9 +14,14 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
-  # raise TriangleError if [a, b, c].any? { |x| x <= 0 }
-  return :equilateral if a == b && b == c
+  sides = [a, b, c]
+  raise TriangleError if sides.any? { |x| x <= 0 }
   
+  *other_sides, max = sides.sort
+  raise TriangleError if other_sides.sum <= max
+
+  return :equilateral if a == b && b == c
+
   return :isosceles if a == b || a == c || b == c
 
   :scalene
