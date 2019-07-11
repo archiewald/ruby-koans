@@ -38,19 +38,11 @@ def score(dice)
     numbers_with_count[number] ? numbers_with_count[number] += 1 : numbers_with_count[number] = 1
   end
 
-  sets = []
-  numbers_with_count.each do |key, value|
-    sets.push key if value >= SET_LENGTH
-  end
+  numbers_with_count.each do |number, count|
+    next if count < SET_LENGTH
 
-
-  sets.each do |value|
-    
-  end
-
-  if sets.include?(1)
-    score += 1000
-    numbers_with_count[1] -= SET_LENGTH
+    score += number == 1 ? 1000 : 100 * number
+    numbers_with_count[number] = count - SET_LENGTH
   end
 
   numbers_with_count.each do |key, value|
@@ -58,18 +50,7 @@ def score(dice)
     score += 100 * value if key == 1
   end
 
-  # puts numbers_with_count
-  # puts "dupa"
-  # puts numbers_with_count[1] && numbers_with_count[1] >= SET_LENGTH
-
-  # points_1s = numbers_with_count[1] && numbers_with_count[1] >= SET_LENGTH ? 1000 + (100 * numbers_with_count[1].length - SET_LENGTH) : 100 * numbers_with_count[1]
-  # points_5s = numbers_with_count[5] >= SET_LENGTH ? 500 : 0
-
   score
-  # You need to write this method
-  # create hash with unique values + count number
-  # count score of set of 1s and set of 5
-  # count the rest
 end
 
 class AboutScoringProject < Neo::Koan
